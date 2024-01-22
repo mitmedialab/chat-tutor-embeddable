@@ -23,6 +23,7 @@
     @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Rethink+Sans&display=block");
 
     .container {
+        color: black;
         font-family: "Rethink Sans", sans-serif;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -30,6 +31,7 @@
         font-size: 1.5rem;
         padding: 0.5rem 1rem;
         border-bottom: 2px solid lightgray;
+        background-color: white;
     }
     button {
         float: right;

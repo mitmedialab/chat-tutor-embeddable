@@ -12,6 +12,7 @@ const meta = {
         testcase: {
             control: { type: 'select' },
             options: ['chatting', 'scroll'] satisfies Case[],
+            defaultValue: undefined,
         }
     }
 } satisfies Meta<AddMessage>;

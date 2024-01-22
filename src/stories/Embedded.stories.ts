@@ -3,8 +3,8 @@ import Emedded from './Embedded.svelte';
 
 const meta = {
     title: "Embedded",
-    component: Emedded,
     tags: ['autodocs'],
+    component: Emedded,
 } satisfies Meta<Emedded>;
 
 export default meta;

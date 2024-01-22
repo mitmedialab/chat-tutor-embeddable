@@ -49,9 +49,12 @@
     @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Rethink+Sans&display=block");
 
     .container {
+        color: black;
         font-family: "Rethink Sans", sans-serif;
         display: flex;
         padding: 10px;
+        background-color: white;
+        border-radius: 10px;
     }
 
     span {
@@ -72,6 +75,7 @@
         flex: 1;
         background: #ddd;
         color: "black";
+        width: 400px;
     }
 
     .send {

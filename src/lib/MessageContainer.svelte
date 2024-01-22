@@ -5,9 +5,10 @@
     export let messages: MessageType[] = [];
 
     let lastMessage: Message;
+    let container: HTMLDivElement;
     let bottom: HTMLDivElement;
 
-    const scroll = () => bottom.scrollIntoView();
+    const scroll = () => container.scrollTo(0, bottom.offsetTop);
 
     export const getAll = () => messages;
     export const getLast = () => messages[messages.length - 1];
@@ -37,11 +38,17 @@
     };
 </script>
 
-<div>
+<div class="container" bind:this={container}>
     {#each messages as { role, content, timestamp }, index}
         {#key index}
             {#if index === messages.length - 1}
-                <Message {role} {content} {timestamp} bind:this={lastMessage} />
+                <Message
+                    {role}
+                    {content}
+                    {timestamp}
+                    isLast={true}
+                    bind:this={lastMessage}
+                />
             {:else}
                 <Message {role} {content} {timestamp} />
             {/if}
@@ -51,7 +58,7 @@
 </div>
 
 <style>
-    div {
+    .container {
         max-height: 100%;
         overflow-y: scroll;
     }

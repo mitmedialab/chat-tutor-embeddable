@@ -80,7 +80,7 @@
 
     onMount(() => cases[testcase](container));
 
-    $: if (container) {
+    $: if (container && testcase) {
         container?.clearMessages();
         cases[testcase](container);
     }
