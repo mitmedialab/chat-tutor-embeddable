@@ -10,7 +10,7 @@ export default defineConfig({
     lib: {
       entry: 'src/lib/Root.svelte',
       name: 'ChatTutor',
-      formats: ['es', 'umd', 'iife'],
+      formats: ['es', 'umd'],
       fileName: (format) => `chat-tutor.${format}.js`
     }
   },
