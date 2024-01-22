@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/svelte';
-import type { Message as MessageType } from '../lib/types';
 import Input from '../lib/Input.svelte';
 
 const meta = {
     title: "Input",
     component: Input,
+    tags: ['autodocs'],
     parameters: {
         layout: "fullscreen",
     }
