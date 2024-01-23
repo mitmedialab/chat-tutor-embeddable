@@ -75,7 +75,6 @@
         flex: 1;
         background: #ddd;
         color: "black";
-        width: 400px;
     }
 
     .send {

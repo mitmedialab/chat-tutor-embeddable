@@ -71,7 +71,8 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
-        max-height: 99vh;
+        width: 400px;
+        max-height: 95vh;
         row-gap: 10px;
         z-index: 2000;
     }
