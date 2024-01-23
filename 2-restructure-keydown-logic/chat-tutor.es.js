@@ -715,9 +715,9 @@ function vn(r, e, n) {
     return t.match(/[a-z]/i) !== null;
   }
   let c = !1;
-  function u(f) {
-    f.key === "Enter" && !f.shiftKey && (c ? (a(), f.preventDefault()) : f.key === "Enter" && f.shiftKey);
-  }
+  const u = (f) => {
+    !c || f.key !== "Enter" || f.shiftKey || (a(), f.preventDefault());
+  };
   function h() {
     t = this.innerText, n(0, t);
   }
