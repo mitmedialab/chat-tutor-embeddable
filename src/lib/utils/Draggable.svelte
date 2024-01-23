@@ -2,9 +2,6 @@
     export let right = 100;
     export let bottom = 100;
 
-    $: bottom = Math.max(0, bottom);
-    $: right = Math.max(0, right);
-
     let moving = false;
     let previous: { left: number; bottom: number };
 
