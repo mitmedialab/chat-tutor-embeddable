@@ -73,6 +73,7 @@
         grid-template-rows: 1fr;
         max-height: 99vh;
         row-gap: 10px;
+        z-index: 2000;
     }
     .row {
         border: 1px solid #ddd;
