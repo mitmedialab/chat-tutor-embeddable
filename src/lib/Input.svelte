@@ -50,21 +50,11 @@
         messageReceived &&
         innerTextContainsLetters();
 
-    function handleKeyDown(event: {
-        key: string;
-        shiftKey: any;
-        preventDefault: () => void;
-    }) {
-        if (event.key === "Enter" && !event.shiftKey) {
-            if (canSend) {
-                send();
-                // Prevent the default Enter key behavior (e.g., new line)
-                event.preventDefault();
-            } else if (event.key === "Enter" && event.shiftKey) {
-                // Allow the default Enter key behavior with Shift key
-            }
-        }
-    }
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (!canSend || event.key !== "Enter" || event.shiftKey) return;
+        send();
+        event.preventDefault();
+    };
 </script>
 
 <svelte:head>
