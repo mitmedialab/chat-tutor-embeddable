@@ -710,13 +710,11 @@ function vn(r, e, n) {
       message: t,
       onResponse: () => n(4, i = !0)
     }), n(0, t = ""), n(4, i = !1);
-  };
-  function o() {
-    return t.match(/[a-z]/i) !== null;
-  }
+  }, o = () => t.match(/[a-z]/i) !== null;
   let c = !1;
   function u(f) {
-    f.key === "Enter" && !f.shiftKey && (c ? (a(), f.preventDefault()) : f.key === "Enter" && f.shiftKey);
+    let d = f.key === "Enter", k = f.shiftKey;
+    d && (k || (c && a(), f.preventDefault()));
   }
   function h() {
     t = this.innerText, n(0, t);
