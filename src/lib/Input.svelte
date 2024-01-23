@@ -15,7 +15,17 @@
     let innerText = "";
     let messageReceived = true;
 
+    /**
+     * Removes all white spaces from the innerText.
+     *
+     * @returns {void}
+     */
+    function getRidOfWhiteSpacesInInnerText(): void {
+        innerText = innerText.replace(/\s/g, "");
+    }
+
     const send = () => {
+        getRidOfWhiteSpacesInInnerText();
         dispatch("send", {
             message: innerText,
             onResponse: () => (messageReceived = true),
@@ -24,8 +34,37 @@
         messageReceived = false;
     };
 
+    /**
+     * Returns a boolean indicating whether the innerText contains letters.
+     *
+     * @returns {boolean} Whether the innerText contains letters.
+     */
+    function innerTextContainsLetters(): boolean {
+        return innerText.match(/[a-z]/i) !== null;
+    }
+
     let canSend = false;
-    $: canSend = Boolean(innerText) && innerText.length > 0 && messageReceived;
+    $: canSend =
+        Boolean(innerText) &&
+        innerText.length > 0 &&
+        messageReceived &&
+        innerTextContainsLetters();
+
+    function handleKeyDown(event: {
+        key: string;
+        shiftKey: any;
+        preventDefault: () => void;
+    }) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            if (canSend) {
+                send();
+                // Prevent the default Enter key behavior (e.g., new line)
+                event.preventDefault();
+            } else if (event.key === "Enter" && event.shiftKey) {
+                // Allow the default Enter key behavior with Shift key
+            }
+        }
+    }
 </script>
 
 <svelte:head>
@@ -36,7 +75,13 @@
 </svelte:head>
 
 <div class="container">
-    <div contenteditable="true" class="input" bind:innerText></div>
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div
+        contenteditable="true"
+        class="input"
+        bind:innerText
+        on:keydown={handleKeyDown}
+    ></div>
     <button class="send" disabled={!canSend} on:click={send}>
         <span class="material-symbols-outlined">send</span>
     </button>
