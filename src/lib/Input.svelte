@@ -15,7 +15,17 @@
     let innerText = "";
     let messageReceived = true;
 
+    /**
+     * Removes all white spaces from the innerText.
+     *
+     * @returns {void}
+     */
+    function getRidOfWhiteSpacesInInnerText(): void {
+        innerText = innerText.replace(/\s/g, "");
+    }
+
     const send = () => {
+        getRidOfWhiteSpacesInInnerText();
         dispatch("send", {
             message: innerText,
             onResponse: () => (messageReceived = true),
@@ -24,8 +34,41 @@
         messageReceived = false;
     };
 
+    const innerTextContainsLetters = (): boolean =>
+        innerText.match(/[a-z]/i) !== null;
+
     let canSend = false;
-    $: canSend = Boolean(innerText) && innerText.length > 0 && messageReceived;
+    $: canSend =
+        Boolean(innerText) &&
+        innerText.length > 0 &&
+        messageReceived &&
+        innerTextContainsLetters();
+
+    /**
+     * Handles the keydown event for pressing Enter and Enter + Shift.
+     *
+     * When Users press Enter, if there is something typed in the message
+     * box, the content will be sent.
+     *
+     * If Users press Enter + Shift, they will go to a new line in the message box.
+     *
+     * @param {KeyboardEvent} event The keydown event.
+     */
+    function handleKeyDown(event: KeyboardEvent): void {
+        let pressedEnter: boolean = event.key === "Enter";
+        let pressedShift: boolean = event.shiftKey;
+
+        if (pressedEnter) {
+            if (pressedShift) {
+                // Allow the default Enter key behavior with Shift key
+            } else {
+                if (canSend) {
+                    send();
+                }
+                event.preventDefault();
+            }
+        }
+    }
 </script>
 
 <svelte:head>
@@ -36,7 +79,13 @@
 </svelte:head>
 
 <div class="container">
-    <div contenteditable="true" class="input" bind:innerText></div>
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div
+        contenteditable="true"
+        class="input"
+        bind:innerText
+        on:keydown={handleKeyDown}
+    ></div>
     <button class="send" disabled={!canSend} on:click={send}>
         <span class="material-symbols-outlined">send</span>
     </button>
