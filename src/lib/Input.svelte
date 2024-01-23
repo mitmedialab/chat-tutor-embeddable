@@ -44,6 +44,13 @@
         messageReceived &&
         innerTextContainsLetters();
 
+
+//     const handleKeyDown = (event: KeyboardEvent) => {
+//         if (!canSend || event.key !== "Enter" || event.shiftKey) return;
+//         send();
+//         event.preventDefault();
+//     };
+
     /**
      * Handles the keydown event for pressing Enter and Enter + Shift.
      *
@@ -69,6 +76,7 @@
             }
         }
     }
+
 </script>
 
 <svelte:head>
