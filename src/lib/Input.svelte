@@ -34,14 +34,8 @@
         messageReceived = false;
     };
 
-    /**
-     * Returns a boolean indicating whether the innerText contains letters.
-     *
-     * @returns {boolean} Whether the innerText contains letters.
-     */
-    function innerTextContainsLetters(): boolean {
-        return innerText.match(/[a-z]/i) !== null;
-    }
+    const innerTextContainsLetters = (): boolean =>
+        innerText.match(/[a-z]/i) !== null;
 
     let canSend = false;
     $: canSend =
@@ -50,11 +44,39 @@
         messageReceived &&
         innerTextContainsLetters();
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-        if (!canSend || event.key !== "Enter" || event.shiftKey) return;
-        send();
-        event.preventDefault();
-    };
+
+//     const handleKeyDown = (event: KeyboardEvent) => {
+//         if (!canSend || event.key !== "Enter" || event.shiftKey) return;
+//         send();
+//         event.preventDefault();
+//     };
+
+    /**
+     * Handles the keydown event for pressing Enter and Enter + Shift.
+     *
+     * When Users press Enter, if there is something typed in the message
+     * box, the content will be sent.
+     *
+     * If Users press Enter + Shift, they will go to a new line in the message box.
+     *
+     * @param {KeyboardEvent} event The keydown event.
+     */
+    function handleKeyDown(event: KeyboardEvent): void {
+        let pressedEnter: boolean = event.key === "Enter";
+        let pressedShift: boolean = event.shiftKey;
+
+        if (pressedEnter) {
+            if (pressedShift) {
+                // Allow the default Enter key behavior with Shift key
+            } else {
+                if (canSend) {
+                    send();
+                }
+                event.preventDefault();
+            }
+        }
+    }
+
 </script>
 
 <svelte:head>
