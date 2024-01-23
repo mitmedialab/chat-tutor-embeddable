@@ -46,7 +46,7 @@
     section {
         user-select: none;
         cursor: move;
-        position: absolute;
+        position: fixed;
     }
 
     section:focus {
