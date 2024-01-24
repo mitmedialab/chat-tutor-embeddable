@@ -1,6 +1,15 @@
 <script lang="ts">
     import Message from "./Message.svelte";
     import type { Message as MessageType } from "./types";
+    import { onMount } from "svelte";
+
+    import {
+        messageStore,
+        addMessageToStore,
+        updateLastMsgInStore,
+        appendContentToLastMsgInStore,
+        resetStore,
+    } from "./messageStore";
 
     export let messages: MessageType[] = [];
 
@@ -14,28 +23,42 @@
     export const getLast = () => messages[messages.length - 1];
 
     export const addMessage = (message: MessageType) => {
-        messages.push(message);
-        messages = messages;
+        addMessageToStore(message);
+        // messages.push(message);
+        // messages = messages;
         scroll();
         return message;
     };
 
     export const updateLastMessageContent = (content: string) => {
-        messages[messages.length - 1].content = content;
-        lastMessage?.update(content);
+        updateLastMsgInStore(content);
+        // messages[messages.length - 1].content = content;
+        // lastMessage?.update(content);
         scroll();
     };
 
     export const appendLastMessageContent = (content: string) => {
-        getLast().content += content;
-        lastMessage?.append(content);
+        appendContentToLastMsgInStore(content);
+        // getLast().content += content;
+        // lastMessage?.append(content);
         scroll();
     };
 
     export const clearMessages = () => {
-        messages = [];
+        resetStore();
+        // messages = [];
         scroll();
     };
+
+    onMount(() => {
+        // Subscribe to changes in the messageStore
+        const unsubscribe = messageStore.subscribe((data) => {
+            messages = data;
+        });
+
+        // Unsubscribe to avoid memory leaks when the component unmounts
+        return () => unsubscribe();
+    });
 </script>
 
 <div class="container" bind:this={container}>

@@ -8,17 +8,33 @@
 
     let opened = false;
     let dragger: Draggable;
+    let messageToUser: string = "Welcome";
 
     const tryToggle = async () => {
         if (dragger.moved()) return;
         opened = !opened;
     };
+
+    const openWindow = async () => {
+        if (dragger.moved()) return;
+        opened = true;
+    };
+
+    const closeWindow = async () => {
+        if (dragger.moved()) return;
+        opened = false;
+        messageToUser = "";
+    };
 </script>
 
 <Draggable bind:this={dragger}>
     {#if opened}
-        <Window initialMessage="Welcome" on:close={tryToggle} {configuration} />
+        <Window
+            initialMessage={messageToUser}
+            on:close={closeWindow}
+            {configuration}
+        />
     {:else}
-        <OpenMe on:click={tryToggle} />
+        <OpenMe on:click={openWindow} />
     {/if}
 </Draggable>

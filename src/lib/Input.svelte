@@ -9,23 +9,19 @@
 
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
+    import { resetStore } from "./messageStore";
 
     const dispatch = createEventDispatcher<Events>();
 
     let innerText = "";
     let messageReceived = true;
 
-    /**
-     * Removes all white spaces from the innerText.
-     *
-     * @returns {void}
-     */
-    function getRidOfWhiteSpacesInInnerText(): void {
-        innerText = innerText.replace(/\s/g, "");
-    }
+    const getRidOfWhiteSpacesBeforeAndAfter = () => {
+        innerText = innerText.trim();
+    };
 
     const send = () => {
-        getRidOfWhiteSpacesInInnerText();
+        getRidOfWhiteSpacesBeforeAndAfter();
         dispatch("send", {
             message: innerText,
             onResponse: () => (messageReceived = true),
@@ -45,9 +41,20 @@
         innerTextContainsLetters();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-        if (!canSend || event.key !== "Enter" || event.shiftKey) return;
-        send();
-        event.preventDefault();
+        let pressedEnter: boolean = event.key === "Enter";
+        let pressedShift: boolean = event.shiftKey;
+
+        if (pressedEnter) {
+            if (pressedShift) {
+                return;
+            }
+
+            if (canSend) {
+                send();
+            }
+
+            event.preventDefault();
+        }
     };
 </script>
 
@@ -69,7 +76,7 @@
     <button class="send" disabled={!canSend} on:click={send}>
         <span class="material-symbols-outlined">send</span>
     </button>
-    <button class="clear">
+    <button class="clear" on:click={resetStore}>
         <span class="material-symbols-outlined">delete_forever</span>
     </button>
 </div>

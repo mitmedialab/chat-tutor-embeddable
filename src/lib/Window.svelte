@@ -42,13 +42,14 @@
     };
 
     onMount(() => {
-        if (initialMessage)
+        if (initialMessage) {
             messages.addMessage({
                 sender: "Assistant",
                 role: "assistant",
                 content: initialMessage,
                 timestamp: nowStamp(),
             });
+        }
     });
 </script>
 
