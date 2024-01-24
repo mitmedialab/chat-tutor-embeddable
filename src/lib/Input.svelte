@@ -44,39 +44,11 @@
         messageReceived &&
         innerTextContainsLetters();
 
-
-//     const handleKeyDown = (event: KeyboardEvent) => {
-//         if (!canSend || event.key !== "Enter" || event.shiftKey) return;
-//         send();
-//         event.preventDefault();
-//     };
-
-    /**
-     * Handles the keydown event for pressing Enter and Enter + Shift.
-     *
-     * When Users press Enter, if there is something typed in the message
-     * box, the content will be sent.
-     *
-     * If Users press Enter + Shift, they will go to a new line in the message box.
-     *
-     * @param {KeyboardEvent} event The keydown event.
-     */
-    function handleKeyDown(event: KeyboardEvent): void {
-        let pressedEnter: boolean = event.key === "Enter";
-        let pressedShift: boolean = event.shiftKey;
-
-        if (pressedEnter) {
-            if (pressedShift) {
-                // Allow the default Enter key behavior with Shift key
-            } else {
-                if (canSend) {
-                    send();
-                }
-                event.preventDefault();
-            }
-        }
-    }
-
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (!canSend || event.key !== "Enter" || event.shiftKey) return;
+        send();
+        event.preventDefault();
+    };
 </script>
 
 <svelte:head>
