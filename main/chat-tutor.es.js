@@ -712,10 +712,9 @@ function vn(r, e, n) {
     }), n(0, t = ""), n(4, i = !1);
   }, o = () => t.match(/[a-z]/i) !== null;
   let c = !1;
-  function u(f) {
-    let d = f.key === "Enter", k = f.shiftKey;
-    d && (k || (c && a(), f.preventDefault()));
-  }
+  const u = (f) => {
+    !c || f.key !== "Enter" || f.shiftKey || (a(), f.preventDefault());
+  };
   function h() {
     t = this.innerText, n(0, t);
   }
