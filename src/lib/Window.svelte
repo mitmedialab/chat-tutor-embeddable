@@ -15,7 +15,6 @@
     import { scale } from "svelte/transition";
     import type { Configuration } from "./types";
 
-    export let initialMessage: string;
     export let configuration: Configuration;
 
     const dispatch = createEventDispatcher<Events>();
