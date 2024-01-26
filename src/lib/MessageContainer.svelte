@@ -1,8 +1,6 @@
 <script lang="ts">
     import Message from "./Message.svelte";
     import type { Message as MessageType } from "./types";
-    import { onMount } from "svelte";
-
     import {
         messageStore,
         addMessageToStore,
@@ -49,20 +47,10 @@
         // messages = [];
         scroll();
     };
-
-    onMount(() => {
-        // Subscribe to changes in the messageStore
-        const unsubscribe = messageStore.subscribe((data) => {
-            messages = data;
-        });
-
-        // Unsubscribe to avoid memory leaks when the component unmounts
-        return () => unsubscribe();
-    });
 </script>
 
 <div class="container" bind:this={container}>
-    {#each messages as { role, content, timestamp }, index}
+    {#each $messageStore as { role, content, timestamp }, index}
         {#key index}
             {#if index === messages.length - 1}
                 <Message
