@@ -40,17 +40,6 @@
 
         event.detail.onResponse();
     };
-
-    onMount(() => {
-        if (initialMessage) {
-            messages.addMessage({
-                sender: "Assistant",
-                role: "assistant",
-                content: initialMessage,
-                timestamp: nowStamp(),
-            });
-        }
-    });
 </script>
 
 <div class="container" in:scale={{ duration: 100 }}>

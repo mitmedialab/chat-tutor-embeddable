@@ -20,29 +20,22 @@
 
     export const addMessage = (message: MessageType) => {
         addMessageToStore(message);
-        // messages.push(message);
-        // messages = messages;
         scroll();
         return message;
     };
 
     export const updateLastMessageContent = (content: string) => {
         updateLastMsgInStore(content);
-        // messages[messages.length - 1].content = content;
-        // lastMessage?.update(content);
         scroll();
     };
 
     export const appendLastMessageContent = (content: string) => {
         appendContentToLastMsgInStore(content);
-        // getLast().content += content;
-        // lastMessage?.append(content);
         scroll();
     };
 
     export const clearMessages = () => {
         resetStore();
-        // messages = [];
         scroll();
     };
 </script>

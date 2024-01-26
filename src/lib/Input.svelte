@@ -41,18 +41,12 @@
         innerTextContainsLetters();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-        let pressedEnter: boolean = event.key === "Enter";
-        let pressedShift: boolean = event.shiftKey;
+        const pressedEnter: boolean = event.key === "Enter";
+        const pressedShift: boolean = event.shiftKey;
 
         if (pressedEnter) {
-            if (pressedShift) {
-                return;
-            }
-
-            if (canSend) {
-                send();
-            }
-
+            if (pressedShift) return;
+            if (canSend) send();
             event.preventDefault();
         }
     };
