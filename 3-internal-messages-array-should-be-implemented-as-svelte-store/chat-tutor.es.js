@@ -6384,10 +6384,10 @@ function fr(r) {
   n = new Zn({}), n.$on(
     "click",
     /*click_handler*/
-    r[5]
+    r[4]
   );
   let d = {};
-  return a = new cr({ props: d }), r[6](a), u = new jn({}), u.$on(
+  return a = new cr({ props: d }), r[5](a), u = new jn({}), u.$on(
     "send",
     /*send*/
     r[2]
@@ -6411,43 +6411,42 @@ function fr(r) {
       g(n.$$.fragment, k), g(a.$$.fragment, k), g(u.$$.fragment, k), f = !1;
     },
     d(k) {
-      k && m(e), z(n), r[6](null), z(a), z(u);
+      k && m(e), z(n), r[5](null), z(a), z(u);
     }
   };
 }
 function hr(r, e, t) {
-  let { initialMessage: s } = e, { configuration: n } = e;
-  const i = Je();
-  let l;
-  const a = async (u) => {
-    const h = l.addMessage({
+  let { configuration: s } = e;
+  const n = Je();
+  let i;
+  const l = async (c) => {
+    const u = i.addMessage({
       sender: "Student",
       role: "user",
-      content: u.detail.message,
+      content: c.detail.message,
       timestamp: Xe()
     });
-    await Pt(h, n), await An(l.getAll(), n, (f) => l.addMessage(f), (f) => l.appendLastMessageContent(f)), u.detail.onResponse();
-  }, o = () => i("close");
-  function c(u) {
-    le[u ? "unshift" : "push"](() => {
-      l = u, t(0, l);
+    await Pt(u, s), await An(i.getAll(), s, (h) => i.addMessage(h), (h) => i.appendLastMessageContent(h)), c.detail.onResponse();
+  }, a = () => n("close");
+  function o(c) {
+    le[c ? "unshift" : "push"](() => {
+      i = c, t(0, i);
     });
   }
-  return r.$$set = (u) => {
-    "initialMessage" in u && t(3, s = u.initialMessage), "configuration" in u && t(4, n = u.configuration);
+  return r.$$set = (c) => {
+    "configuration" in c && t(3, s = c.configuration);
   }, [
-    l,
     i,
-    a,
-    s,
     n,
-    o,
-    c
+    l,
+    s,
+    a,
+    o
   ];
 }
 class pr extends M {
   constructor(e) {
-    super(), q(this, e, hr, fr, I, { initialMessage: 3, configuration: 4 }, ur);
+    super(), q(this, e, hr, fr, I, { configuration: 3 }, ur);
   }
 }
 function dr(r) {
