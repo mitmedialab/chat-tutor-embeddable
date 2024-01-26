@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/svelte';
 import Message from '../lib/Message.svelte';
 import type { Message as MessageType } from '../lib/types';
+import { resetStore } from '../lib/messageStore';
 
 const meta = {
     title: "Message",
@@ -16,7 +17,8 @@ const meta = {
     },
     parameters: {
         layout: "fullscreen",
-    }
+    },
+    play: resetStore
 } satisfies Meta<Message>;
 
 export default meta;

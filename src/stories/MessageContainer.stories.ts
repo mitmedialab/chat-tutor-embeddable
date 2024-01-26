@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/svelte';
 import MessageContainer from '../lib/MessageContainer.svelte';
 import type { Message as MessageType } from '../lib/types';
 import { LoremIpsum } from "lorem-ipsum";
+import { addMessageToStore } from '../lib/messageStore';
+import { nowStamp } from '../lib';
 
 const lorem = new LoremIpsum({
     sentencesPerParagraph: {
@@ -18,11 +20,23 @@ const meta = {
     title: "MessageContainer",
     component: MessageContainer,
     tags: ['autodocs'],
-    argTypes: {
-        messages: { control: 'array' },
-    },
+    argTypes: {},
     parameters: {
         layout: "fullscreen",
+    },
+    play: () => {
+        addMessageToStore({
+            role: 'assistant',
+            content: lorem.generateSentences(1),
+            sender: 'Assistant',
+            timestamp: nowStamp(),
+        });
+        addMessageToStore({
+            role: 'user',
+            content: lorem.generateSentences(1),
+            sender: 'Student',
+            timestamp: nowStamp(),
+        });
     }
 } satisfies Meta<MessageContainer>;
 
@@ -30,20 +44,4 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const base: Story = {
-    args: {
-        messages: [
-            {
-                role: 'assistant',
-                content: lorem.generateSentences(1),
-            },
-            {
-                role: 'user',
-                content: lorem.generateSentences(2),
-            },
-        ] satisfies MessageType[],
-    },
-    play: async (x) => {
-
-    },
-}
+export const base: Story = {}

@@ -9,16 +9,14 @@
         resetStore,
     } from "./messageStore";
 
-    export let messages: MessageType[] = [];
-
     let lastMessage: Message;
     let container: HTMLDivElement;
     let bottom: HTMLDivElement;
 
     const scroll = () => container.scrollTo(0, bottom.offsetTop);
 
-    export const getAll = () => messages;
-    export const getLast = () => messages[messages.length - 1];
+    export const getAll = () => $messageStore;
+    export const getLast = () => $messageStore[$messageStore.length - 1];
 
     export const addMessage = (message: MessageType) => {
         addMessageToStore(message);
@@ -52,7 +50,7 @@
 <div class="container" bind:this={container}>
     {#each $messageStore as { role, content, timestamp }, index}
         {#key index}
-            {#if index === messages.length - 1}
+            {#if index === $messageStore.length - 1}
                 <Message
                     {role}
                     {content}
