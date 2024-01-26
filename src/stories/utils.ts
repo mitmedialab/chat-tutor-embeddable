@@ -1,4 +1,4 @@
-import type { Configuration } from "../lib/types";
+import type {Configuration} from "../lib/types";
 
 /**
  * A utility to wait a certain amount of milliseconds in an async function.
@@ -18,9 +18,12 @@ export async function untilTimePassed(timeMs: number) {
     );
 }
 
+
+//the askEndpoint is just a testing url for the local testing. 
+//it should be replaced with the real url when the backend is deployed.
 export const dummyConfiguration: Configuration = {
     collections: [],
-    askEndpoint: "",
+    askEndpoint: "http://127.0.0.1:5000/ask",
     addEndpoint: "",
     model: "gpt-3.5-turbo-16k",
-}
+};

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/svelte';
+import type {Meta, StoryObj} from '@storybook/svelte';
 import Window from '../lib/Window.svelte';
-import { dummyConfiguration } from './utils';
+import {dummyConfiguration} from './utils';
 
 const meta = {
     title: "Window",
@@ -22,4 +22,4 @@ export const base: Story = {
         initialMessage: "Welcome to ChatTutor, feel free to ask any questions about this lesson.",
         configuration: dummyConfiguration
     }
-}
+};
