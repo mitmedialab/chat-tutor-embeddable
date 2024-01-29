@@ -22,12 +22,14 @@
                 role: "assistant",
                 content: "Hello, I'm the assistant!",
                 timestamp: new Date().toLocaleTimeString(),
+                sender: "Assistant",
             });
             await untilTimePassed(1000);
             container.addMessage({
                 role: "user",
                 content: "Hello, I'm the user!",
                 timestamp: new Date().toLocaleTimeString(),
+                sender: "Student",
             });
             await untilTimePassed(1000);
             container.updateLastMessageContent(
@@ -36,13 +38,14 @@
             const stack = getParagraphStack();
             while (stack.length > 0) {
                 await untilTimePassed(10);
-                container.appendLastMessageContent(stack.pop());
+                container.appendLastMessageContent(stack.pop()!);
             }
             await untilTimePassed(1000);
             container.addMessage({
                 role: "assistant",
                 content: "Hello, I'm the assistant!",
                 timestamp: new Date().toLocaleTimeString(),
+                sender: "Assistant",
             });
         },
         scroll: async (container) => {
@@ -53,12 +56,13 @@
                 const stack = getParagraphStack();
                 container.addMessage({
                     role: isAssistant ? "assistant" : "user",
-                    content: stack.pop(),
+                    content: stack.pop()!,
                     timestamp: new Date().toLocaleTimeString(),
+                    sender: isAssistant ? "Assistant" : "Student",
                 });
                 while (stack.length > 0) {
                     await untilTimePassed(10);
-                    container.appendLastMessageContent(stack.pop());
+                    container.appendLastMessageContent(stack.pop()!);
                 }
                 messageCount++;
                 isAssistant = !isAssistant;

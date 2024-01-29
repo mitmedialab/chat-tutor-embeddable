@@ -15,7 +15,6 @@
     import { scale } from "svelte/transition";
     import type { Configuration } from "./types";
 
-    export let initialMessage: string;
     export let configuration: Configuration;
 
     const dispatch = createEventDispatcher<Events>();
@@ -40,16 +39,6 @@
 
         event.detail.onResponse();
     };
-
-    onMount(() => {
-        if (initialMessage)
-            messages.addMessage({
-                sender: "Assistant",
-                role: "assistant",
-                content: initialMessage,
-                timestamp: nowStamp(),
-            });
-    });
 </script>
 
 <div class="container" in:scale={{ duration: 100 }}>

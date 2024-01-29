@@ -1,8 +1,13 @@
 <script lang="ts">
     import Message from "./Message.svelte";
     import type { Message as MessageType } from "./types";
-
-    export let messages: MessageType[] = [];
+    import {
+        messageStore,
+        addMessageToStore,
+        updateLastMsgInStore,
+        appendContentToLastMsgInStore,
+        resetStore,
+    } from "./messageStore";
 
     let lastMessage: Message;
     let container: HTMLDivElement;
@@ -10,38 +15,35 @@
 
     const scroll = () => container.scrollTo(0, bottom.offsetTop);
 
-    export const getAll = () => messages;
-    export const getLast = () => messages[messages.length - 1];
+    export const getAll = () => $messageStore;
+    export const getLast = () => $messageStore[$messageStore.length - 1];
 
     export const addMessage = (message: MessageType) => {
-        messages.push(message);
-        messages = messages;
+        addMessageToStore(message);
         scroll();
         return message;
     };
 
     export const updateLastMessageContent = (content: string) => {
-        messages[messages.length - 1].content = content;
-        lastMessage?.update(content);
+        updateLastMsgInStore(content);
         scroll();
     };
 
     export const appendLastMessageContent = (content: string) => {
-        getLast().content += content;
-        lastMessage?.append(content);
+        appendContentToLastMsgInStore(content);
         scroll();
     };
 
     export const clearMessages = () => {
-        messages = [];
+        resetStore();
         scroll();
     };
 </script>
 
 <div class="container" bind:this={container}>
-    {#each messages as { role, content, timestamp }, index}
+    {#each $messageStore as { role, content, timestamp }, index}
         {#key index}
-            {#if index === messages.length - 1}
+            {#if index === $messageStore.length - 1}
                 <Message
                     {role}
                     {content}
